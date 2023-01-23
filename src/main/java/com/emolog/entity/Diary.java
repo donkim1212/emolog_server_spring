@@ -1,4 +1,4 @@
-package com.emolog.model;
+package com.emolog.entity;
 
 import java.util.UUID;
 
