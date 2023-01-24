@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emolog.entity.Diary;
+import com.emolog.model.Diary;
 import com.emolog.service.DiaryService;
 
 @RestController

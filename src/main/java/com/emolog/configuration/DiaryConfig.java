@@ -1,17 +1,20 @@
-package com.emolog.springboot.gradle;
+package com.emolog.configuration;
+
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.emolog.entity.Diary;
+import com.emolog.model.Diary;
 import com.emolog.repository.DiaryRepository;
 import com.emolog.repository.MemoryDiaryRepository;
 import com.emolog.service.DiaryService;
 
 @Configuration
 @ConfigurationProperties(prefix="diary")
-public class DiaryConfigProperties {
+@EnableJpaRepositories(basePackageClasses = Diary.class)
+public class DiaryConfig {
 	@Bean
 	public DiaryService diaryService() {
 		return new DiaryService(diaryRepository());

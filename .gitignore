@@ -1,6 +1,3 @@
-# Created by https://www.toptal.com/developers/gitignore/api/gradle,java
-# Edit at https://www.toptal.com/developers/gitignore?templates=gradle,java
-
 ### Java ###
 # Compiled class file
 *.class
@@ -50,8 +47,9 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+# Properties file
+*.properties
+
 ### Gradle Patch ###
 # Java heap dump
 *.hprof
-
-# End of https://www.toptal.com/developers/gitignore/api/gradle,java
