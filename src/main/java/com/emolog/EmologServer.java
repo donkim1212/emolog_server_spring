@@ -14,17 +14,17 @@ import org.springframework.context.annotation.ComponentScan;
 //@EnableJpaRepositories
 @SpringBootApplication
 @ConfigurationPropertiesScan("com.emolog.configuration")
-@EnableAutoConfiguration(exclude = { // remove later on
-	    DataSourceAutoConfiguration.class,
-	    DataSourceTransactionManagerAutoConfiguration.class,
-	    HibernateJpaAutoConfiguration.class})
+//@EnableAutoConfiguration(exclude = { // remove later on
+//	    DataSourceAutoConfiguration.class,
+//	    DataSourceTransactionManagerAutoConfiguration.class,
+//	    HibernateJpaAutoConfiguration.class})
 @ComponentScan(basePackages = { "com.emolog.service","com.emolog.controller", "com.emolog.model", "com.emolog.repository"} )
 public class EmologServer {
 //	private DiaryController dc = new DiaryController(new DiaryService());
 	public static void main(String[] args) {
 		SpringApplication.run(EmologServer.class, args);
 		
-		System.out.println("Hi");
+		System.out.println("App running...");
 	}
 	
 }
