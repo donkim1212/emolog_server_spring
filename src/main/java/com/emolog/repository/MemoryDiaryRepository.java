@@ -1,30 +1,33 @@
 package com.emolog.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.stereotype.Repository;
-
 import com.emolog.model.Diary;
 
-@Repository
-public class MemoryDiaryRepository implements DiaryRepository{
+public class MemoryDiaryRepository implements DiaryRepository {
 
 	@Override
 	public Diary save(Diary entity) {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("MemoryDiaryRepository : save");
+		return entity;
 	}
 
 	@Override
-	public Diary findAllDiariesByAccToken(String accToken) {
+	public Optional<Diary> findAllDiariesByAuthorId(UUID author_id) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Diary> dlist = new ArrayList<Diary>();
+//		dlist.add(new Diary());
+//		dlist.add(new Diary());
+		return dlist.stream().findAny();
+
 	}
 
 	@Override
-	public Optional<Diary> findById(UUID id) {
+	public Optional<Diary> findById(UUID author_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -40,5 +43,17 @@ public class MemoryDiaryRepository implements DiaryRepository{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	@Override
+	public List<Diary> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Diary findDiaryByAccAndID(String accToken, UUID id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
