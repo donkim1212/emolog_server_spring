@@ -45,7 +45,7 @@ public class MemoryDiaryRepository implements DiaryRepository {
 	}
 
 	@Override
-	public List<Diary> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
+	public Optional<Diary> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
 		// TODO Auto-generated method stub
 		return null;
 	}

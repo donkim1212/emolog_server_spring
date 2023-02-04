@@ -2,31 +2,44 @@ package com.emolog.model;
 
 import java.util.UUID;
 
+import org.hibernate.annotations.UuidGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-//import jakarta.persistence.Table;
 
 @Entity
-//@Table(name="diary")
+//@Table(name="diary", schema="public")
 public class Diary {
 
-	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="diary_id", nullable=false)
+	@UuidGenerator
 	private UUID diary_id;
 	
+	@Column(name="author_id", nullable=false)
 	private UUID author_id;
-	private String calendar_date, diary_title, diary_emotion, diary_content, diary_pw;
+	@Column(name="calendar_date", nullable=false)
+	private String calendar_date;
+	@Column(name="diary_title", nullable=false)
+	private String diary_title;
+	@Column(name="diary_emotion", nullable=false)
+	private String diary_emotion;
+	@Column(name="diary_content", nullable=false)
+	private String diary_content;
+	@Column(name="diary_pw", nullable=false)
+	private String diary_pw;
 
 	@Autowired
-	public Diary(UUID author_id, String calendar_date, String diary_title, String diary_emotion, String diary_content) {
+	public Diary(UUID author_id, String calendar_date, String diary_title, String diary_emotion, String diary_content, String diary_pw) {
 		this.author_id = author_id;
 		this.calendar_date = calendar_date;
 		this.diary_title = diary_title;
 		this.diary_emotion = diary_emotion;
 		this.diary_content = diary_content;
+		this.diary_pw = diary_pw;
 	}
 
 	public void show() {

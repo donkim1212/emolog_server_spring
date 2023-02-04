@@ -32,10 +32,11 @@ public class DiaryService {
 			System.out.println("Added to DB.");
 			JSONObject resData = new JSONObject();
 			resData.put("message", "Diary Created");
-			resData.put("diary_id", reqData.getDiaryId());
-			resData.put("diary_emotion", reqData.getDiaryEmotion());
-			resData.put("calendar_date", reqData.getCalendarDate());
-			return new ResponseEntity(resData, HttpStatus.CREATED);
+//			resData.put("diary_id", reqData.);
+//			resData.put("diary_id", reqData.getDiaryId());
+//			resData.put("diary_emotion", reqData.getDiaryEmotion());
+//			resData.put("calendar_date", reqData.getCalendarDate());
+			return new ResponseEntity<JSONObject>(resData, HttpStatus.CREATED);
 		}
 	}
 	
@@ -49,6 +50,7 @@ public class DiaryService {
 		return new ResponseEntity(resData, HttpStatus.OK);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public ResponseEntity getLimitedNumberDiaries (String decodedAcc) {
 		
 		return ResponseEntity.ok(HttpStatus.OK);

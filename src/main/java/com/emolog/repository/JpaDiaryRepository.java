@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.context.annotation.Primary;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.emolog.model.Diary;
@@ -12,18 +12,28 @@ import com.emolog.model.Diary;
 import jakarta.persistence.EntityManager;
 
 @Repository
-@Primary
+//@Primary
 public class JpaDiaryRepository implements DiaryRepository {
 
+	@Autowired
 	private final EntityManager em;
 
+	@Autowired
 	public JpaDiaryRepository(EntityManager em) {
 		this.em = em;
 	}
 
 	@Override
 	public Diary save(Diary entity) {
-		em.persist(entity);
+		try {
+			em.persist(entity);
+		} catch (Exception e) {
+			System.out.println("JpaDiaryRepository: An exception occurred.");
+			System.out.println(e.getClass());
+			System.out.println(e.getCause());
+			return null;
+		}
+		System.out.println("JpaDiaryRepository: Save successful.");
 		return entity;
 	}
 
@@ -53,9 +63,13 @@ public class JpaDiaryRepository implements DiaryRepository {
 	}
 
 	@Override
-	public List<Diary> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
+	public Optional<Diary> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
 		// TODO Auto-generated method stub
-		return null;
+		List<Diary> list = em.createQuery("select d from Diary d where d.author_id = :author_id", Diary.class)
+				.setParameter("author_id", author_id)
+				.setMaxResults(limit)
+				.getResultList();
+		return list.stream().findAny();
 	}
 
 	@Override
