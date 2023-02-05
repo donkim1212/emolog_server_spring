@@ -13,7 +13,7 @@ import com.emolog.repository.JpaDiaryRepository;
 import jakarta.persistence.EntityManager;
 
 @Configuration
-@ConfigurationProperties(prefix="diary")
+//@ConfigurationProperties(prefix="diary")
 @EnableJpaRepositories(basePackageClasses = Diary.class)
 public class DiaryConfig {
 //	@Bean

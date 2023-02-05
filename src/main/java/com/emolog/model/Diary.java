@@ -2,21 +2,24 @@ package com.emolog.model;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.UuidGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-//@Table(name="diary", schema="public")
+@Table(name="diary")//, schema="public")
 public class Diary {
 
 	@Id
-//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(generator="uuid4")
+	@GenericGenerator(name="uuid4", strategy="org.hibernate.id.UUIDGenerator")
 	@Column(name="diary_id", nullable=false)
-	@UuidGenerator
+//	@GeneratedValue(strategy=GenerationType.IDENTITY)
+//	@UuidGenerator
 	private UUID diary_id;
 	
 	@Column(name="author_id", nullable=false)
@@ -31,8 +34,12 @@ public class Diary {
 	private String diary_content;
 	@Column(name="diary_pw", nullable=false)
 	private String diary_pw;
+	
+	public Diary() {
+		super();
+	}
 
-	@Autowired
+//	@Autowired
 	public Diary(UUID author_id, String calendar_date, String diary_title, String diary_emotion, String diary_content, String diary_pw) {
 		this.author_id = author_id;
 		this.calendar_date = calendar_date;

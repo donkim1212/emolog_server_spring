@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.emolog.model.Diary;
 
 import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 
 @Repository
 //@Primary
@@ -24,17 +25,21 @@ public class JpaDiaryRepository implements DiaryRepository {
 	}
 
 	@Override
+	@Transactional
 	public Diary save(Diary entity) {
 		try {
+//			em.getTransaction().begin();
 			em.persist(entity);
+//			em.flush();
+//			em.getTransaction().commit();
+			System.out.println("JpaDiaryRepository: Save successful.");
+			return entity;
 		} catch (Exception e) {
 			System.out.println("JpaDiaryRepository: An exception occurred.");
 			System.out.println(e.getClass());
 			System.out.println(e.getCause());
 			return null;
 		}
-		System.out.println("JpaDiaryRepository: Save successful.");
-		return entity;
 	}
 
 	@Override
