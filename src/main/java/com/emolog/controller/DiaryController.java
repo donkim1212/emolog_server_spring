@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.emolog.model.Diary;
+import com.emolog.entity.DiaryEntity;
 import com.emolog.service.DiaryService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,7 +27,7 @@ public class DiaryController {
 	}
 
 	@PostMapping("/")
-	public ResponseEntity createDiary(@RequestBody Diary diary) {
+	public ResponseEntity createDiary(@RequestBody DiaryEntity diary) {
 		return diaryService.createDiary(diary);
 	}
 

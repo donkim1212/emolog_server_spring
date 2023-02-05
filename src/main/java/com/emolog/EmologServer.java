@@ -14,9 +14,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 //	    DataSourceAutoConfiguration.class,
 //	    DataSourceTransactionManagerAutoConfiguration.class,
 //	    HibernateJpaAutoConfiguration.class})
-@EnableJpaRepositories
 @ComponentScan("com.emolog.*")
-@EntityScan("com.emolog.model")
+@EntityScan("com.emolog.entity")
 public class EmologServer {
 //	private DiaryController dc = new DiaryController(new DiaryService());
 	public static void main(String[] args) {

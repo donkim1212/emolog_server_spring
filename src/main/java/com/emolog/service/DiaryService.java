@@ -10,23 +10,23 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.emolog.model.Diary;
-import com.emolog.repository.DiaryRepository;
+import com.emolog.entity.DiaryEntity;
+import com.emolog.repository.IDiaryRepository;
 
 @Service
 //@Transactional
 public class DiaryService {
 	
-	private final DiaryRepository diaryRepository;
+	private final IDiaryRepository diaryRepository;
 	
 	@Autowired
-	public DiaryService (DiaryRepository dr) {
+	public DiaryService (IDiaryRepository dr) {
 		this.diaryRepository = dr;
 //		System.out.println("DS");
 	}
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public ResponseEntity createDiary(Diary reqData) {
+	public ResponseEntity createDiary(DiaryEntity reqData) {
 		// TODO try-catch the repo.save()
 		if (diaryRepository.save(reqData) == null) {
 			// if not successful,
@@ -50,7 +50,7 @@ public class DiaryService {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ResponseEntity getAllDiariesByAccToken (String decodedToken) {
-		Optional<Diary> diaries = diaryRepository.findAllDiariesByAuthorId(UUID.fromString(decodedToken));
+		Optional<DiaryEntity> diaries = diaryRepository.findAllDiariesByAuthorId(UUID.fromString(decodedToken));
 		
 		JSONObject resData = new JSONObject();
 		resData.put("message", "Got all Diaries");

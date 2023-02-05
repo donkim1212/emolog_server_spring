@@ -7,31 +7,29 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.emolog.model.Diary;
+import com.emolog.entity.DiaryEntity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Repository
+@Transactional
 //@Primary
-public class JpaDiaryRepository implements DiaryRepository {
+public class CustomDiaryRepository implements IDiaryRepository {
 
 	@Autowired
 	private final EntityManager em;
 
 	@Autowired
-	public JpaDiaryRepository(EntityManager em) {
+	public CustomDiaryRepository(EntityManager em) {
 		this.em = em;
 	}
 
 	@Override
-	@Transactional
-	public Diary save(Diary entity) {
+	public DiaryEntity save(DiaryEntity entity) {
 		try {
-//			em.getTransaction().begin();
 			em.persist(entity);
 //			em.flush();
-//			em.getTransaction().commit();
 			System.out.println("JpaDiaryRepository: Save successful.");
 			return entity;
 		} catch (Exception e) {
@@ -43,46 +41,45 @@ public class JpaDiaryRepository implements DiaryRepository {
 	}
 
 	@Override
-	public Optional<Diary> findById(UUID diary_id) {
-		Diary diary = em.find(Diary.class, diary_id);
+	public Optional<DiaryEntity> findById(UUID diary_id) {
+		DiaryEntity diary = em.find(DiaryEntity.class, diary_id);
 		return Optional.ofNullable(diary);
 	}
 
 	@Override
-	public Optional<Diary> findByName(String name) {
+	public Optional<DiaryEntity> findByName(String name) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Diary> findAll() {
-		return em.createQuery("select d from Diary d", Diary.class).getResultList();
+	public List<DiaryEntity> findAll() {
+		return em.createQuery("select d from DiaryEntity d", DiaryEntity.class).getResultList();
 	}
 
 	@Override
-	public Optional<Diary> findAllDiariesByAuthorId(UUID author_id) {
-		List<Diary> list = em.createQuery("select d from Diary d where d.author_id = :author_id", Diary.class)
+	public Optional<DiaryEntity> findAllDiariesByAuthorId(UUID author_id) {
+		List<DiaryEntity> list = em.createQuery("select d from DiaryEntity d where d.author_id = :author_id", DiaryEntity.class)
 			.setParameter("author_id", author_id)
 			.getResultList();
 		return list.stream().findAny();
 	}
 
 	@Override
-	public Optional<Diary> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
-		// TODO Auto-generated method stub
-		List<Diary> list = em.createQuery("select d from Diary d where d.author_id = :author_id", Diary.class)
+	public Optional<DiaryEntity> findLimitedDiariesByAuthorId(UUID author_id, int limit) {
+		List<DiaryEntity> list = em.createQuery("select d from DiaryEntity d where d.author_id = :author_id", DiaryEntity.class)
 				.setParameter("author_id", author_id)
 				.setMaxResults(limit)
 				.getResultList();
 		return list.stream().findAny();
 	}
 
-	@Override
 	/**
 	 * Works just like findById
 	 */
-	public Diary findDiaryByAccAndID(String accToken, UUID diary_id) {
-		return em.createQuery("select d from Diary d where d.author_id = :id", Diary.class)
+	@Override
+	public DiaryEntity findDiaryByAccAndID(String accToken, UUID diary_id) {
+		return em.createQuery("select d from DiaryEntity d where d.author_id = :id", DiaryEntity.class)
 			.setParameter("id", diary_id)
 			.getSingleResult();
 	}
