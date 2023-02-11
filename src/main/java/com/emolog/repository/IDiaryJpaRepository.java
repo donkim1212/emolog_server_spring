@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.emolog.entity.DiaryEntity;
 
-//@Repository // JpaRepositories won't need this
+//@Repository // JpaRepositories won't need this annotation
 public interface IDiaryJpaRepository extends JpaRepository<DiaryEntity, UUID> {
 	
 }

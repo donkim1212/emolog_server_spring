@@ -50,6 +50,7 @@ public class DiaryService {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ResponseEntity getAllDiariesByAccToken (String decodedToken) {
+		if (decodedToken == null || decodedToken == "") return new ResponseEntity(new JSONObject().put("message", "invalid token"), HttpStatus.FORBIDDEN);
 		Optional<DiaryEntity> diaries = diaryRepository.findAllDiariesByAuthorId(UUID.fromString(decodedToken));
 		
 		JSONObject resData = new JSONObject();
